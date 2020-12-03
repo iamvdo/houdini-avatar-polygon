@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+  <style>
+  html {
+    background: #111;
+  }
+  #el {
+    width: 152px;
+    height: 152px;
+    background: url(https://iamvdo.me/images/apple-touch-152.png);
+    background-size: cover;
+    --avatar-sides: 12;
+    --avatar-angle: 0deg;
+    margin: 50px auto;
+    border-radius: 50%;
+  }
+  @supports (background: paint(avatar-polygon)) {
+    #el.is-loaded {
+      border-radius: 0;
+      -webkit-mask-image: paint(avatar-polygon);
+      mask-image: paint(avatar-polygon);
+    }
+  }
+  </style>
+</head>
+<body>
+  <div id="el"></div>
+  <script>
+    if ('paintWorklet' in CSS) {
+      el.classList.add('is-loaded');
+      CSS.paintWorklet.addModule('../index.js');
+    }
+  </script>
+</body>
+</html>
+
